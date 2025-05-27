@@ -7,50 +7,55 @@ use Livewire\Component;
 
 class ContactForm extends Component
 {
-    //proprietà pubbliche per il form
-    public $contact;
+    public $contactId;
     public $name;
     public $email;
     public $phone;
-    public $contactId;
-    //validazione dei dati in entrata
-    protected $rules = [
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255|unique:contacts,email',
-        'phone' => 'nullable|string|max:20',
-    ];
-    public function getLastContact()
+    // il metodo mount viene utilizzato per inizializzare i dati del componente
+    // quando viene caricato. In questo caso, se viene passato un ID, il componente
+    // carica i dati del contatto corrispondente e li assegna alle proprietà del componente.
+    // i dati vengono passati tramite l'URL, quindi il metodo mount viene chiamato automaticamente
+    //     quando il componente viene caricato con un ID specifico.
+    public function mount($id = null)
     {
-        $this->contact = Contact::latest()->first();
+        if ($id) {
+            $contact = Contact::findOrFail($id);
+            $this->contactId = $contact->id;
+            $this->name = $contact->name;
+            $this->email = $contact->email;
+            $this->phone = $contact->phone;
+        }
     }
-    public function create()
+
+    public function save()
     {
-        //con questo metodo richiamo la validazione dei dati 
-        $this->validate();
-        //creo un nuovo contatto con i dati inseriti nel form
-        Contact::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->phone,
+        // Validazione dei dati del modulo
+        $this->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'nullable|string|max:20',
         ]);
-        $this->getLastContact();
-        $this->resetForm();
+        // Se l'ID del contatto è presente, aggiorna il contatto esistente,
+        // altrimenti crea un nuovo contatto.
+        if ($this->contactId) {
+            Contact::find($this->contactId)->update([
+                'name' => $this->name,
+                'email' => $this->email,
+                'phone' => $this->phone,
+            ]);
+            session()->flash('message', 'Contatto aggiornato!');
+        } else {
+            Contact::create([
+                'name' => $this->name,
+                'email' => $this->email,
+                'phone' => $this->phone,
+            ]);
+            session()->flash('message', 'Contatto creato!');
+        }
+
+        $this->reset(['name', 'email', 'phone', 'contactId']);
     }
-    public function update($id)
-    {
-        $conatact = Contact::findOrFail($id);
-        $this->validate();
-        $this->name = $conatact->name;
-        $this->email = $conatact->email;
-        $this->phone = $conatact->phone;
-    }
-    public function resetForm()
-    {
-        $this->name = '';
-        $this->email = '';
-        $this->phone = '';
-        $this->contactId = null;
-    }
+
     public function render()
     {
         return view('livewire.contact-form');

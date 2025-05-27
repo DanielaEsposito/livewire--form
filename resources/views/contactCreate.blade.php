@@ -29,11 +29,7 @@
                 </header>
 
                 <main class="mt-6">
-                    <section>
-                        <h1 class="text-white text-center text-4xl my-6">Lista contatti</h1>
-                        @livewire('contact-index')
-                    </section>
-                    <h1 class="text-center text-white text-2xl">form test </h1>
+
                     @livewire('contact-form')
                 </main>
 
