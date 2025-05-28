@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Contact;
 use Livewire\Component;
 
+
 class ContactForm extends Component
 {
     public $contactId;
@@ -16,9 +17,11 @@ class ContactForm extends Component
     // carica i dati del contatto corrispondente e li assegna alle proprietà del componente.
     // i dati vengono passati tramite l'URL, quindi il metodo mount viene chiamato automaticamente
     //     quando il componente viene caricato con un ID specifico.
+    //con questo metodo riporto i dati già presenti del contatto negli input per fare successivamnete la modifica 
     public function mount($id = null)
     {
         if ($id) {
+            //definisco la variabile contatto e  assegno alle variabili pubbliche il valore già esistente del contantto 
             $contact = Contact::findOrFail($id);
             $this->contactId = $contact->id;
             $this->name = $contact->name;
