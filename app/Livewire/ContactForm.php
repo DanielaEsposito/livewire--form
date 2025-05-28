@@ -8,6 +8,7 @@ use Livewire\Component;
 
 class ContactForm extends Component
 {
+    public $contact;
     public $contactId;
     public $name;
     public $email;
@@ -28,6 +29,10 @@ class ContactForm extends Component
             $this->email = $contact->email;
             $this->phone = $contact->phone;
         }
+    }
+    public function getLastContact()
+    {
+        $this->contact = Contact::latest()->first();
     }
 
     public function save()
@@ -53,6 +58,7 @@ class ContactForm extends Component
                 'email' => $this->email,
                 'phone' => $this->phone,
             ]);
+            $this->getLastContact();
             session()->flash('message', 'Contatto creato!');
         }
 

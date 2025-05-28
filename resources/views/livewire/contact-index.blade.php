@@ -9,8 +9,10 @@
                     <p class="text-gray-700">{{ $contact->phone }}</p>
                 </div>
                 <div class="flex justify-between">
-                    <a class="inline-block p-2 border-2  border-indigo-500 rounded-md "
+                    <a class="inline-block  cursor-pointer hover:bg-indigo-500  p-2 border-2 text-white border-indigo-500 rounded-md "
                         href="{{ route('form', $contact->id) }}">Modifica</a>
+                    <button
+                        class=" mx-2 border-2 cursor-pointer hover:bg-indigo-500 text-white border-indigo-500 rounded-md p-2">Elimina</button>
                 </div>
         @endforeach
     </ul>

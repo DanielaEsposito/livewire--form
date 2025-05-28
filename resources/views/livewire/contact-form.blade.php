@@ -12,7 +12,8 @@
         <input id="phone" type="text" wire:model="phone" placeholder="Telefono"
             class="border p-2 my-2 w-full rounded">
 
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 mt-4 rounded cursor-pointer">
+        <button type="submit"
+            class=" border-indigo-500 border-2 hover:bg-indigo-500  text-white px-4 py-2 mt-4 rounded cursor-pointer">
             {{ $contactId ? 'Aggiorna' : 'Salva' }}
         </button>
     </form>
@@ -27,16 +28,17 @@
     {{-- Visualizza il nuovo contatto solo se è stato appena creato --}}
     @if (session('message') === 'Contatto creato!')
         <h2 class="text-lg font-semibold text-white mt-6">Nuovo contatto creato:</h2>
-        <div class="new-contact bg-white shadow p-4 rounded mt-2 text-left">
+        <div class="new-contact  p-4 rounded mt-2 text-left">
             <div class="mb-2">
-                <strong>Nome:</strong> {{ $name }}
+                <strong>Nome:</strong> {{ $contact->name }}
             </div>
             <div class="mb-2">
-                <strong>Email:</strong> {{ $email }}
+                <strong>Email:</strong> {{ $contact->email }}
             </div>
             <div class="mb-2">
-                <strong>Telefono:</strong> {{ $phone }}
+                <strong>Telefono:</strong> {{ $contact->phone }}
             </div>
+            <div class="mb-2 text-center"><a href="{{ route(welcome) }}">Torna alla lista dei contatti </a></div>
         </div>
     @endif
 </div>
