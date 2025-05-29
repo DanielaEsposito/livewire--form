@@ -1,9 +1,10 @@
 <div>
     <div class="container">
         <label for="name">Cerca per nome</label>
-        <input type="text" wire:model="search" name="name" placeholder="Cerca per nome..."
+        <input type="text" wire:model.live.debounce.300ms="search" name="name" placeholder="Cerca per nome..."
             class="rounded-md border-2 border-indigo-500">
-        <p class="text-white">input inserito: {{ $search }}</p>
+
+
     </div>
 
     <ul class="list-none p-0 m-0">
