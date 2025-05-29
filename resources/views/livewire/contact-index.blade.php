@@ -1,10 +1,23 @@
 <div>
-    <div class="container">
-        <label for="name">Cerca per nome</label>
-        <input type="text" wire:model.live.debounce.300ms="search" name="name" placeholder="Cerca per nome..."
-            class="rounded-md border-2 border-indigo-500">
+    <div class="container text-center my-12 columns-3">
+        <div class="name">
 
-
+            <label class="block text-white mb-2 text-md" for="name">Cerca per nome</label>
+            <input type="text" wire:model.live.debounce.200ms="searchName" name="name" placeholder="Cerca per nome..."
+                class="rounded-md p-2 border-2 border-indigo-500 focus:bg-indigo-400/30 focus:outline-none focus  ">
+        </div>
+        <div class="phone">
+            <label class="block text-white mb-2 text-md" for="phone">Cerca per numero</label>
+            <input type="text" name="phone"wire:model.live.debounce.200ms="searchPhone"
+                placeholder="Cerca per email..."
+                class="rounded-md p-2 border-2 border-indigo-500  focus:bg-indigo-400/30 focus:outline-none focus ">
+        </div>
+        <div class="email">
+            <label class="block text-white mb-2 text-md" for="email">Cerca per email</label>
+            <input type="email" name="email"wire:model.live.debounce.200ms="searchEmail"
+                placeholder="Cerca per email..."
+                class="rounded-md p-2 border-2 border-indigo-500  focus:bg-indigo-400/30 focus:outline-none focus ">
+        </div>
     </div>
 
     <ul class="list-none p-0 m-0">
