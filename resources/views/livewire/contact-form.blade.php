@@ -38,7 +38,7 @@
             <div class="mb-2">
                 <strong>Telefono:</strong> {{ $contact->phone }}
             </div>
-            <div class="mb-2 text-center"><a href="{{ route(welcome) }}">Torna alla lista dei contatti </a></div>
+            <div class="mb-2 text-center"><a href="/">Torna alla lista dei contatti </a></div>
         </div>
     @endif
 </div>
